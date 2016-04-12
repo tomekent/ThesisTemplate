@@ -1,0 +1,148 @@
+
+\immediate\write18{makeindex \jobname.nlo -s nomencl.ist -o \jobname.nls}
+
+\documentclass[12pt]{ociamthesis}  % default square logo 
+%\documentclass[12pt,beltcrest]{ociamthesis} % use old belt crest logo
+%\documentclass[12pt,shieldcrest]{ociamthesis} % use older shield crest logo
+
+
+%load any additional packagessize 
+\usepackage{amssymb}
+\usepackage{subfigure}
+
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{float}
+\usepackage{algorithm}  
+\usepackage{url}
+\usepackage{algpseudocode}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{enumitem}
+\usepackage{nomencl}
+\makeglossary
+\usepackage{emptypage}
+
+\usepackage{fancyhdr}
+\usepackage{acronym} 
+% \usepackage{tikz} %Not used but is excellent for drawing
+
+\usepackage{afterpage}
+\usepackage{lscape}
+\usepackage{url}
+
+%---Listing for code----%
+\usepackage{listings}
+
+\usepackage{hyperref} % hyperref is the best
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage[capitalise]{cleveref}
+  
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+
+\newcommand{\Cov}{\mathrm{Cov}}
+
+%add a new blank page
+\newcommand{\newpagenonum}{
+  \mbox{}
+  \thispagestyle{empty}
+  \newpage
+}
+
+%vector boldings
+\newcommand{\vect}[1]{\mathbf{#1}}
+
+
+%table captions
+\usepackage{caption} 
+\captionsetup[table]{skip=5pt}
+%input macros (i.e. write your own macros file called mymacros.tex 
+%and uncomment the next line)
+%\include{mymacros}
+
+\title{Super Amazing Research\\[1ex]     %your thesis title,
+         in the Field of Awesomeness}   %note \\[1ex] is a line break in the title
+
+\author{Joe Bloggs}             %your name	
+\college{Faculty of Things}  %your college
+
+%\renewcommand{\submittedtext}{change the default text here if needed}
+\degree{Doctor of Philosophy}     %the degree
+\degreedate{April 2015}         %the degree date
+\wordcount{enough}
+\makenomenclature
+
+%end the preamble and start the document
+\begin{document}
+  
+%this baselineskip gives sufficient line spacing for an examiner to easily
+%markup the thesis with  comments
+  % \baselineskip=18pt plus1pt
+
+%set the number of sectioning levels that get number and appear in the contents
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\onehalfspacing
+% \doublespacing
+
+
+\maketitle                 			 % create a title page from the preamble info
+\cleardoublepage  
+\begin{romanpages_onepage}     	    							      % start roman page numbering
+  \include{Abstract/Abstract}          				% include the abstracttwo 
+	\input{Dedications/Dedications}      				% include a dedication.tex file
+	\include{Acknowlegements/Acknowlegements} 	% include an acknowledgements.tex file
+	\include{Declaration/Declaration} 		 	  	% include debclaration to sign
+			% Make the nomenclature	
+	\printnomenclature[2.5 cm] 
+  \include{Acronyms/Acronyms}         %include the acronyms
+	\tableofcontents         	   % generate and include a table of contents
+	\listoffigures            	  % generate and include a list of figures
+  \listoftables
+  \cleardoublepage
+\end{romanpages_onepage}            % end roman page numbering
+
+
+% now include the files of latex for each of the chapters etc
+% each chapter should be in its own folder:
+% ../ChapterN
+% ../ChapterN/figures/
+% this keeps things clean, and means you can comment out chapters to speed up compilation!
+\include{Chapter01/Chapter01}
+\include{Chapter02/Chapter02} 
+\include{Chapter03/Chapter03}
+\include{Conclusion/Conclusion}
+
+%now enable appendix numbering format and include any appendices
+\appendix
+% \include{Appendices/Appendix1}
+% \include{Appendices/Appendix2}
+
+%next line adds the Bibliography to the contents page
+\addcontentsline{toc}{chapter}{Bibliography}
+%uncomment next line to change bibliography name to references\useexternalfile{
+%\renewcommand{\bibname}{References}
+\bibliography{library}      %use a bibtex bibliography file refs.bib
+% \bibliographystyle{IEEEtran}   %use the plain bibliography style
+\bibliographystyle{ieeetr}   %use the plain bibliography style
+\end{document}
+
